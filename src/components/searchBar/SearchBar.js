@@ -1,21 +1,39 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react' ;
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateSearchTerm } from './searchBarSlice';
+
 
 
 const SearchBar = function() {
   const [searchTerm, setSearchTerm] = useState('')
+  const dispatch = useDispatch();
+  
 
-  const handleChange = () => {
-    const searchTerm = searchTerm;
-    setSearchTerm(searchTerm);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(updateSearchTerm({
+      searchTerm: searchTerm
+    }));
   }
 
   return (
     <>
       <input 
-        className="searchBar" 
+        className="searchBar"
+        id="searchTerm" 
         value={searchTerm} 
-        onChange={handleChange}/>
+        onChange={(e) => setSearchTerm(e.target.value)}
+        type="text" 
+      />
+      <button
+        type="submit"
+        onClick={handleSubmit}
+      >
+        <span className="material-icons searchLogo">search</span>
+      </button>
+
     </>
   )
 }
