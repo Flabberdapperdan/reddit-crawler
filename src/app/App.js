@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <header>
+        <span className="material-icons logo">explore</span>
         <h1>Reddit Crawler</h1>
-        <i className="compass"></i>
       </header>
       <main>
         <SearchBar />

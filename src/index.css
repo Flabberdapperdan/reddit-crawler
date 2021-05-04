@@ -1,20 +1,34 @@
 body {
   font-family: "Courier New", Courier, monospace;
+  background-color: rgb(60, 155, 180, 0.65);
 }
 
+/* HEADER */
 header {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  font-size: 24px;
+  opacity: 0.9;
 }
 
 h1 {
   font-family: "Raleway";
   font-weight: 300;
+  text-shadow: 1px 1.5px rgb(102, 102, 102);
 }
 
+.logo {
+  padding-right: 5px;
+  font-size: 40px;
+}
+
+/* MAIN */
 main {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+/* searchBar */
