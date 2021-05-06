@@ -25,7 +25,8 @@ const SearchBar = function() {
         id="searchTerm" 
         value={searchTerm} 
         onChange={(e) => setSearchTerm(e.target.value)}
-        type="text" 
+        type="text"
+        placeholder="Search Reddit" 
       />
       <button
         type="submit"

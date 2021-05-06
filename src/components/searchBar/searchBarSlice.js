@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const initialState = {
+const initialState = {
   searchTerm: ''
 }
 
@@ -9,12 +9,12 @@ const searchBarSlice = createSlice({
   initialState: initialState,
   reducers: {
     updateSearchTerm: (state, action) => {
-      state.searchBar = action.payload.searchBar
+      state.searchTerm = action.payload.searchTerm
     }
   }
 })
 
 export const { updateSearchTerm } = searchBarSlice.actions;
+export const searchTermSelecter = (state) => state.searchBar.searchTerm;
 
-const reducer = searchBarSlice.reducer
-export default reducer;
+export default searchBarSlice;

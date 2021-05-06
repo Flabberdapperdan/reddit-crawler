@@ -1,27 +1,15 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { initialState } from './searchBarSlice';
-import {describe, expect, test} from '@jest/globals';
-import reducer from './searchBarSlice';
+import searchBarSlice, { updateSearchTerm } from './searchBarSlice';
 
-describe('search bar reducer', () => {
-  it('returns the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
-  });
+const { actions } = searchBarSlice;
 
-  it('handles input', () => {
-    const searchTerm = 'Animals in the zoo.'
-    const input = {
-      type: 'updateSearchTerm',
-      payload: {
-        searchTerm: searchTerm
-      }
+describe('actions', () => {
+  it('should create an action to update the search term', () => {
+    const inputObject = { searchTerm: 'Animals in the zoo', }
+    const expectedAction = {
+      type: 'searchBar/updateSearchTerm',
+      payload: inputObject
     }
-
-    const expectedOutput = {
-      searchTerm: searchTerm
-    }
-
-    expect(reducer(input)).toEqual(expectedOutput);
+    expect(actions.updateSearchTerm(inputObject)).toEqual(expectedAction)
   })
-});
+})
