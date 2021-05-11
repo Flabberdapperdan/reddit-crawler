@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import searchBarSlice, { updateSearchTerm } from './searchBarSlice';
+import searchBarSlice from './searchBarSlice';
 
 const { actions } = searchBarSlice;
 

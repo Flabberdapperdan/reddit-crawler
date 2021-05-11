@@ -15,6 +15,6 @@ const searchBarSlice = createSlice({
 })
 
 export const { updateSearchTerm } = searchBarSlice.actions;
-export const searchTermSelecter = (state) => state.searchBar.searchTerm;
+export const searchTermSelector = (state) => state.searchBar.searchTerm;
 
 export default searchBarSlice;

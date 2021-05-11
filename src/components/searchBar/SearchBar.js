@@ -3,12 +3,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSearchTerm } from './searchBarSlice';
 
-
-
 const SearchBar = function() {
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch();
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +13,13 @@ const SearchBar = function() {
     dispatch(updateSearchTerm({
       searchTerm: searchTerm
     }));
+
+    setSearchTerm('');
   }
 
   return (
-    <>
+    <div className="searchBar">
       <input 
-        className="searchBar"
         id="searchTerm" 
         value={searchTerm} 
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -35,7 +33,7 @@ const SearchBar = function() {
         <span className="material-icons searchLogo">search</span>
       </button>
 
-    </>
+    </div>
   )
 }
 

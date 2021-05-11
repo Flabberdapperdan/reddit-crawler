@@ -1,19 +1,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Provider } from 'react-redux';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { Provider, useSelector } from 'react-redux';
+import { fireEvent, screen, render, queryByText } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 
-import { updateSearchTerm } from './searchBarSlice'
+import { searchTermSelector, updateSearchTerm } from './searchBarSlice'
 import SearchBar from './SearchBar';
 import store from '../../app/store';
 import searchBarSlice from './searchBarSlice';
 
-afterEach(cleanup);
-
 const renderComponent = () => render(
-  <Provider store={store}>
+  <Provider store={store()}>
     <SearchBar />
   </Provider>
 );
@@ -21,6 +19,7 @@ const renderComponent = () => render(
 const reducer = searchBarSlice.reducer;
 
 describe('test the input field in SearchBar', () => {
+
   it('changes the local state when input is given', () => {
     const { getByText, getByPlaceholderText } = renderComponent();
     const inputElement = getByPlaceholderText('Search Reddit');
@@ -33,8 +32,16 @@ describe('test the input field in SearchBar', () => {
     expect(inputElement).toHaveValue(input);
   })
 
-  it('updates the store when submit button is pressed', () => {
-    
+  it('when submit button is pressed, updates the store and clears the searchbar', () => {
+    const { queryByText, getByRole, getByPlaceholderText } = renderComponent();
+    const inputElement = getByPlaceholderText('Search Reddit');
+    const input = 'Zoo Animals';
+
+    userEvent.type(inputElement, input);
+    userEvent.click(getByRole('button'));
+
+    expect(input).toBeInTheDocument;
+    expect(inputElement).toHaveValue('');
   })
 })
 

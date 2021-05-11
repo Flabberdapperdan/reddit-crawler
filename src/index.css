@@ -32,3 +32,16 @@ main {
 }
 
 /* searchBar */
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar input {
+  margin-right: 5px;
+  height: 20px;
+}
+
+.searchBar button {
+  margin-left: 5px;
+}
