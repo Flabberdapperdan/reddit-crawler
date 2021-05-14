@@ -7,7 +7,7 @@ const store = () => {
   const store = configureStore({
     reducer: {
       searchBar: searchBarSlice.reducer,
-      searchResults: searchResultsSlice.recuder
+      searchResults: searchResultsSlice.reducer,
     },
   });
 

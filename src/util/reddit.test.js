@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import reddit from './reddit';
-
+    
 describe('test reddit api ojbect', () => {
 
   describe('processSearchTerm', () => {
@@ -28,31 +28,28 @@ describe('test reddit api ojbect', () => {
   })
 
   describe('fetchSearchResults', () => {
-    const jsonObject = {
-      title: 'apples',
-      image:'apples.src',
-      comments: 'hello world',
-      kudos: 80
+    const output = {
+      data: {
+        children: [1, 2, 3, 4]
+      }
     }
-    global.fetch = jest.fn(() => {
-      Promise.resolve({
-        json: () => Promise.resolve(jsonObject)
-      })
-    });
 
     beforeEach(() => {
-      fetch.mockClear();
+      fetch.resetMocks();
     });
 
-    it('returns a json object when called with a searchTerm', async () => {
-       const result = await reddit.fetchSearchResults(apple);
+    it('returns an array when called with a search term', async () => {
+      fetch.mockResponseOnce(JSON.stringify({ data: {children: [1, 2, 3, 4]} }));
 
-       expect(result).toBe(jsonObject);
-       expect(fetch).toHaveBeenCalledTimes(1);
-    })
-    it('returns an empty array when called with no searchTerm', () => {
+      const result = await reddit.fetchArticles('cookie cutter');
 
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(result).toEqual([1, 2, 3, 4]);
+      expect(fetch.mock.calls[0][0]).toEqual('www.reddit.com/search.json?q=cookie%20cutter');
     })
+    /* it('returns an empty array when called with no searchTerm', () => {
+
+    }) */
 
   })
 })

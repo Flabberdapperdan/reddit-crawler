@@ -9,16 +9,16 @@ const reddit = {
 
     return fullString;
   },
-  fetchSearchResults(searchTerm) {
+  fetchArticles(searchTerm) {
     const fetchString = this.processSearchTerm(searchTerm);
-    fetch(fetchString)
+    const response = fetch(fetchString)
       .then(response => response.json())
-      .then((jsonResponse) => {
-        if (jsonResponse.data.children) {
-          const responseArray = jsonResponse.data.children
-          return responseArray;
+      .then(jsonResponse => {
+        if (jsonResponse.data.children.length > 0) {
+          return jsonResponse.data.children;
         }
       })
+    return response;
   }
 }
 

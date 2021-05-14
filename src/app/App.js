@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import './App.css';
 import SearchBar from '../components/searchBar/SearchBar';
+import SearchResultsContainer from '../components/searchResultsContainer/SearchResultsContainer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       </header>
       <main>
         <SearchBar />
+        <SearchResultsContainer />
       </main>
     </>
   );
