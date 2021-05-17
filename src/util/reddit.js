@@ -10,6 +10,7 @@ const reddit = {
     return fullString;
   },
   fetchArticles(searchTerm) {
+    console.log('fetching from reddit')
     const fetchString = this.processSearchTerm(searchTerm);
     const response = fetch(fetchString)
       .then(response => response.json())

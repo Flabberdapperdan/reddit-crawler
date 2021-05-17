@@ -4,15 +4,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import reddit from '../../util/reddit';
 
 
-export const fetchArticles = createAsyncThunk(
-  'searchResults/fetchArticles',
+export const updateArticles = createAsyncThunk(
+  'searchResults/updateArticles',
   async (searchTerm, { getState, requestId }) => {
     const { loading } = getState().searchResults.articles;
+    console.log(loading);
     if (loading !== 'pending' || requestId !== currentRequestId) {
+      console.log('exit the async thunk'); ///WHY IS DOES THE USEEFFECT END UP HERE? CHECK REDUX TOOLKIT DOCUMENTATION
       return
     }
-    const response = await reddit.fetchArticles;
-    return response.data.children;
+    console.log('request data from reddit.js');
+    const response = await reddit.fetchArticles(searchTerm);
+    return response;
   }
 )
 
@@ -30,21 +33,25 @@ const searchResultsSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [fetchArticles.pending]: (state, action) => {
+    [updateArticles.pending]: (state, action) => {
+      console.log('async thunk pending');
+      console.log(action.payload);
       if (state.loading === 'idle') {
         state.loading = 'pending';
         state.currentRequestId = action.meta.requestId;
       }
     },
-    [fetchArticles.fulfilled]: (state, action) => {
+    [updateArticles.fulfilled]: (state, action) => {
+      console.log('async thunk fulfilled');
       const { requestId } = action.meta;
       if (state.loading === 'pending' && state.currentRequestId === requestId) {
         state.loading = 'idle';
-        state.children.push(action.payload);
+        state.children = action.payload;
         state.currentRequestId = undefined;
       }
     },
-    [fetchArticles.rejected]: (state, action) => {
+    [updateArticles.rejected]: (state, action) => {
+      console.log('async thunk rejected');
       const { requestId } = action.meta;
       if (state.loading === 'pending' && tate.currentRequestId === requestId) {
         state.loading === 'idle';
@@ -55,6 +62,7 @@ const searchResultsSlice = createSlice({
   } 
 })
 
-export const articleSelector = state => state.searchResults.articles;
+export const articleArraySelector = state => state.searchResults.articles.children;
+export const articleErrorSelector = state => state.searchResults.articles.error;
 
 export default searchResultsSlice;

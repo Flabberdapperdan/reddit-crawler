@@ -28,12 +28,6 @@ describe('test reddit api ojbect', () => {
   })
 
   describe('fetchSearchResults', () => {
-    const output = {
-      data: {
-        children: [1, 2, 3, 4]
-      }
-    }
-
     beforeEach(() => {
       fetch.resetMocks();
     });

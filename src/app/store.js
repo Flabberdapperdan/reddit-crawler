@@ -10,7 +10,6 @@ const store = () => {
       searchResults: searchResultsSlice.reducer,
     },
   });
-
   return store;
 }
 

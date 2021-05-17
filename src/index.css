@@ -1,6 +1,12 @@
 body {
   font-family: "Courier New", Courier, monospace;
-  background-color: rgb(60, 155, 180, 0.65);
+  background-color: rgb(103, 152, 166, 0.65);
+}
+
+.errorMessage {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+  color: rgb(183, 79, 110);
 }
 
 /* HEADER */
@@ -27,8 +33,13 @@ h1 {
 /* MAIN */
 main {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  background-color: rgb(110, 189, 108, 0.8);
+
+  padding-top: 5px;
 }
 
 /* searchBar */
@@ -44,4 +55,10 @@ main {
 
 .searchBar button {
   margin-left: 5px;
+}
+
+/* search results */
+.searchResults {
+  display: flex;
+  flex-direction: column;
 }

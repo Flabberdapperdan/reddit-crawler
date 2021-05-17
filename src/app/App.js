@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
 import './App.css';
 import SearchBar from '../components/searchBar/SearchBar';
