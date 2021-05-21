@@ -3,13 +3,13 @@
 import PropTypes from 'prop-types';
 
 
-const Article = function({ title, author, upvotes, subreddit, images }) {
+const Article = function({ title, author, upvotes, subreddit, imagesUrl, handleClick }) {
   return (
-    <>
+    <div className="article" onClick={handleClick}>
       <h3 >{title}</h3>
       <img 
         className="preview-image"
-        href={images.source.url}
+        href={imagesUrl}
         alt="Could not load image"
       />
       <div className="information-bar">
@@ -17,7 +17,7 @@ const Article = function({ title, author, upvotes, subreddit, images }) {
         <p>upvotes: {upvotes}</p>
         <p>subreddit: {subreddit}</p>
       </div>
-    </>
+    </div>
   )
 }
 

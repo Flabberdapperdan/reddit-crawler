@@ -6,16 +6,11 @@ import reddit from '../../util/reddit';
 
 export const updateArticles = createAsyncThunk(
   'searchResults/updateArticles',
-  async (searchTerm, { getState, requestId }) => {
-    const { loading } = getState().searchResults.articles;
-    console.log(loading);
-    if (loading !== 'pending' || requestId !== currentRequestId) {
-      console.log('exit the async thunk'); ///WHY IS DOES THE USEEFFECT END UP HERE? CHECK REDUX TOOLKIT DOCUMENTATION
-      return
-    }
+  async ({ searchTerm, searchLimit }, { getState, requestId }) => {
     console.log('request data from reddit.js');
-    const response = await reddit.fetchArticles(searchTerm);
-    return response;
+    const response = await reddit.fetchArticles(searchTerm, searchLimit);
+    console.log('this is the response: ', response);
+    return response.children;
   }
 )
 
@@ -36,27 +31,32 @@ const searchResultsSlice = createSlice({
     [updateArticles.pending]: (state, action) => {
       console.log('async thunk pending');
       console.log(action.payload);
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-        state.currentRequestId = action.meta.requestId;
+      console.log('this is the pending state: ', state.articles)
+      if (state.articles.loading === 'idle') {
+        console.log('ready to change the pending state.articles')
+        state.articles.loading = 'pending';
+        state.articles.currentRequestId = action.meta.requestId;
       }
     },
     [updateArticles.fulfilled]: (state, action) => {
-      console.log('async thunk fulfilled');
+      console.log('async thunk fulfilled', action);
+      console.log('this is the fulfilled state: ', state.articles)
       const { requestId } = action.meta;
-      if (state.loading === 'pending' && state.currentRequestId === requestId) {
-        state.loading = 'idle';
-        state.children = action.payload;
-        state.currentRequestId = undefined;
+      console.log('this is the requestId: ', requestId);
+      if (state.articles.loading === 'pending' && state.articles.currentRequestId === requestId) {
+        console.log('ready to adjust payload');
+        state.articles.loading = 'idle';
+        state.articles.children = action.payload;
+        state.articles.currentRequestId = undefined;
       }
     },
     [updateArticles.rejected]: (state, action) => {
       console.log('async thunk rejected');
       const { requestId } = action.meta;
-      if (state.loading === 'pending' && tate.currentRequestId === requestId) {
-        state.loading === 'idle';
-        state.error = action.error;
-        state.currentRequestId = undefined;
+      if (state.articles.loading === 'pending' && tate.currentRequestId === requestId) {
+        state.articles.loading === 'idle';
+        state.articles.error = action.error;
+        state.articles.currentRequestId = undefined;
       }
     }
   } 
