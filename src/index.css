@@ -1,6 +1,14 @@
+:root {
+  --color1: 224, 217, 132;
+  --color2: 102, 148, 125;
+  --color3: 144, 224, 184;
+  --color4: 148, 93, 72;
+  --color5: 224, 110, 68;
+}
+
 body {
   font-family: "Courier New", Courier, monospace;
-  background-color: rgb(103, 152, 166, 0.65);
+  background-color: rgba(var(--color1), 0.8);
 }
 
 .errorMessage {
@@ -37,8 +45,6 @@ main {
   align-items: center;
   justify-content: center;
 
-  background-color: rgb(110, 189, 108, 0.8);
-
   padding-top: 5px;
 }
 
@@ -46,19 +52,35 @@ main {
 .searchBar {
   display: flex;
   align-items: center;
+
+  margin-bottom: 10px;
 }
 
-.searchBar input {
+.searchBar > * {
+  border: 2px;
+  border-style: solid;
+  border-color: rgba(var(--color2), 0.35);
+
+  background-color: white;
+}
+
+input#searchTerm {
   margin-right: 5px;
-  height: 20px;
+  height: 30px;
 }
 
 .searchBar button {
   margin-left: 5px;
+  padding: 1px;
+
+  height: 36px;
+  width: 40px;
 }
 
 /* search results */
 .searchResults {
   display: flex;
   flex-direction: column;
+
+  background-color: rgba(var(--color2), 0.9);
 }

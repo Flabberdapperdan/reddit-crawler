@@ -15,8 +15,6 @@ const SearchResultsContainer = function() {
 
   const searchTerm = useSelector(searchTermSelector);
   const children = useSelector(articleArraySelector);
-  console.log('these are the children: ', children);
-  console.log('this is the searchTerm: ', searchTerm);
 
   const dispatch = useDispatch();
 
@@ -46,7 +44,7 @@ const SearchResultsContainer = function() {
         if (children) {
           return children.map((child, index) => {
             console.log('this is data of the child: ', child.data);
-            const { title, author, ups, subreddit_name_prefixed, url } = child.data;
+            const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
             return ( 
             <Article 
               className="article"
@@ -56,14 +54,7 @@ const SearchResultsContainer = function() {
               upvotes={ups}
               subreddit={subreddit_name_prefixed}
               url={url}
-              imagesUrl={(() => {
-                if (child.data.preview) {
-                  const imageUrl = child.data.preview.images[0].source.url;
-                  return imageUrl;
-                }
-                
-              })()
-            }
+              thumbnail={thumbnail}
             /> 
           )})
         } else if (errorState) {
