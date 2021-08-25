@@ -23,46 +23,45 @@ const SearchResultsContainer = function() {
       try {
         const resultAction = await dispatch(updateArticles({ searchTerm: searchTerm, searchLimit: searchLimit }));
         unwrapResult(resultAction);
-        console.log(children);
       } catch (err) {
         setErrorState(err.message);
-        console.log(err.message);
       }
     }
   }, [searchTerm])
 
   
-  /* const handleClick = (url) => {
-    if(url) {
-      window.open(url);
-    }
-  } */ //I want to use this to make each article click-able, directing the user the corresponding reddit article
+  if (searchTerm) {
+    return (
+      <div className="searchResults">
+        {(() => {
+          if (children) {
+            return children.map((child, index) => {
+              const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
+              return ( 
+              <Article 
+                className="article"
+                key={index}
+                title={title}
+                author={author}
+                upvotes={ups}
+                subreddit={subreddit_name_prefixed}
+                articleURL={url}
+                thumbnail={thumbnail}
+              /> 
+            )})
+          } else if (errorState) {
+            return <p className="errorMessage">Error: {errorState}</p>
+          }
+        })()}
+      </div>
+    )
+  } else {
+    return (
+      <>
+      </>
+    )
+  }
 
-  return (
-    <div className="searchResults">
-      {(() => {
-        if (children) {
-          return children.map((child, index) => {
-            console.log('this is data of the child: ', child.data);
-            const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
-            return ( 
-            <Article 
-              className="article"
-              key={index}
-              title={title}
-              author={author}
-              upvotes={ups}
-              subreddit={subreddit_name_prefixed}
-              url={url}
-              thumbnail={thumbnail}
-            /> 
-          )})
-        } else if (errorState) {
-          return <p className="errorMessage">Error: {errorState}</p>
-        }
-      })()}
-    </div>
-  )
 }
 
 export default SearchResultsContainer

@@ -3,22 +3,32 @@
 import PropTypes from 'prop-types';
 
 
-const Article = function({ title, author, upvotes, subreddit, thumbnail, handleClick }) {
+const Article = function({ title, author, upvotes, subreddit, thumbnail, articleURL }) {
   console.log(thumbnail);
-  
+
+  const handleClick = () => {
+    console.log('I am handling the click')
+    if(articleURL) {
+      window.open(articleURL);
+    }
+  }
+
   return (
-    <div className="article" onClick={handleClick}>
-      <h3 >{title}</h3>
-      <img 
-        className="preview-image"
-        src={thumbnail}
-        alt="Could not load thumbnail"
-      />
-      <p>{thumbnail}</p>
-      <div className="information-bar">
-        <p>{author}</p>
-        <p>upvotes: {upvotes}</p>
-        <p>subreddit: {subreddit}</p>
+    <div className="article-container">
+      <div className="article" onClick={handleClick}>
+        <h3 >{title}</h3>
+        <div className="image-information-holder">
+          <img 
+            className="preview-image"
+            src={thumbnail}
+            alt="Could not load thumbnail"
+          />
+          <div className="information-bar">
+            <p>username: {author}</p>
+            <p>subreddit: {subreddit}</p>
+            <p>upvotes: {upvotes}</p>
+          </div>
+        </div>  
       </div>
     </div>
   )
@@ -29,3 +39,6 @@ Article.propTypes = {
 }
 
 export default Article;
+
+
+<p></p>
