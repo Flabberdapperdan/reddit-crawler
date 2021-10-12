@@ -6,7 +6,8 @@ import { searchTermSelector } from '../searchBar/searchBarSlice';
 import { updateArticles, articleArraySelector } from './searchResultsSlice';
 import { unwrapResult } from "@reduxjs/toolkit";
 
-import Article from'./article/Article';
+import Tile from'./tile/Tile';
+import './searchResultsContainer.css'
 
 const SearchResultsContainer = function() {
   const [errorState, setErrorState] = useState(undefined);
@@ -32,14 +33,14 @@ const SearchResultsContainer = function() {
   
   if (searchTerm) {
     return (
-      <div className="searchResults">
+      <div className="search-results">
         {(() => {
           if (children) {
             return children.map((child, index) => {
               const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
               return ( 
-              <Article 
-                className="article"
+              <Tile 
+                className=""
                 key={index}
                 title={title}
                 author={author}

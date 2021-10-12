@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
 import PropTypes from 'prop-types';
-
+import './Tile.css';
 
 const Article = function({ title, author, upvotes, subreddit, thumbnail, articleURL }) {
   console.log(thumbnail);
@@ -13,20 +13,28 @@ const Article = function({ title, author, upvotes, subreddit, thumbnail, article
     }
   }
 
+  const thumbnailChecker = (source) => {
+    if (source) {
+      return source
+    } else {
+      return '../../../../../public/outline_explore_black_24dp.png'
+    }
+  }
+
   return (
-    <div className="article-container">
-      <div className="article" onClick={handleClick}>
-        <h3 >{title}</h3>
+    <div className="tile-container">
+      <div className="tile" onClick={handleClick}>
+        <h3 className="tile-title">{title}</h3>
         <div className="image-information-holder">
           <img 
             className="preview-image"
-            src={thumbnail}
+            src={thumbnailChecker(thumbnail)}
             alt="Could not load thumbnail"
           />
           <div className="information-bar">
-            <p>username: {author}</p>
-            <p>subreddit: {subreddit}</p>
-            <p>upvotes: {upvotes}</p>
+            <p className="username">username: {author}</p>
+            <p className="subreddit">subreddit: {subreddit}</p>
+            <p className="upvotes">upvotes: {upvotes}</p>
           </div>
         </div>  
       </div>
@@ -39,6 +47,3 @@ Article.propTypes = {
 }
 
 export default Article;
-
-
-<p></p>

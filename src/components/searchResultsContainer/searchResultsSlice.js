@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import reddit from '../../util/reddit';
+import { fetchArticles } from '../../util/reddit';
 
 
 export const updateArticles = createAsyncThunk(
   'searchResults/updateArticles',
   async ({ searchTerm, searchLimit }, { getState, requestId }) => {
     console.log('request data from reddit.js');
-    const response = await reddit.fetchArticles(searchTerm, searchLimit);
+    const response = await fetchArticles(searchTerm, searchLimit);
     console.log('this is the response: ', response);
     return response.children;
   }

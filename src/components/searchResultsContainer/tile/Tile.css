@@ -1,0 +1,100 @@
+/* Tile */
+.tile-container { /* this container allows for a box-shadow which does not move when the tile is clicked */
+  box-shadow: 8px 10px 2.5px var(--color5);
+  
+  border-radius: 5px;
+  width: 500px;
+  margin: 15px;
+}
+
+.tile {
+  background-color: var(--color4);
+  opacity: 95%;
+
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  height: calc(100% - 20px); /* make sure the tile never crosses the container */
+}
+
+.tile:active {
+  transform: translateX(10px);
+  transform: translateY(10px);
+}
+
+.tile-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  max-height: 1em;
+  max-width: 100%;
+}
+
+.image-information-holder {
+  display: flex;
+}
+
+.search-results .information-bar {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+
+/* Mobile Devices */
+@media only screen and (max-width: 600px) {
+
+  h1 {
+    text-align: center;
+  }
+  
+  .tile-container {
+    max-width: 92%;
+    height: 150px;
+    margin: 7px 5px 7px 1px;
+
+    box-shadow: 7px 7px 1.5px var(--color5);
+  }
+
+  .tile {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+
+    height: calc(100% - 10px);
+    padding: 5px;
+  }
+  
+  .tile-title {
+    font-size: 18px;
+    white-space: normal;
+    overflow-x: hidden;
+    overflow-wrap: normal;
+    word-wrap: break-word;
+
+    height: 90%;
+    width: 67%;
+    margin: 3px;
+  }
+
+  .image-information-holder {
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+    max-width: 30%;
+  }
+
+  .preview-image {
+    height:100%;
+    width: 100%;
+    max-width: 90%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .information-bar > * {
+    display: none;
+  }
+
+}

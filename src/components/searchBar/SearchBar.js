@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateSearchTerm } from './searchBarSlice';
 
 const SearchBar = function() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ const SearchBar = function() {
         value={searchTerm} 
         onChange={(e) => setSearchTerm(e.target.value)}
         type="text"
-        placeholder="Search Reddit" 
+        placeholder=" Search Reddit" 
       />
       <button
         type="submit"

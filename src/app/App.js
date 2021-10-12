@@ -9,7 +9,7 @@ function App() {
     <>
       <header>
         <span className="material-icons logo">explore</span>
-        <h1>Reddit Crawler</h1>
+        <h1 className="header">Reddit Crawler</h1>
       </header>
       <main>
         <SearchBar />
