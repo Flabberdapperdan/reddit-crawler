@@ -3,7 +3,7 @@ export const processSearchTerm = (searchTerm) => {
   const wordsArray = searchTerm.split(' ');
 
   const searchString = wordsArray.join('%20');
-  const fullString = `http://www.reddit.com/search.json?q=${searchString}`;
+  const fullString = `https://www.reddit.com/search.json?q=${searchString}`;
 
   return fullString;
 }
