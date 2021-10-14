@@ -18,22 +18,22 @@ const SearchBar = function() {
   }
 
   return (
-    <div className="searchBar">
-      <input 
-        id="searchTerm" 
-        value={searchTerm} 
-        onChange={(e) => setSearchTerm(e.target.value)}
-        type="text"
-        placeholder=" Search Reddit" 
-      />
-      <button
-        type="submit"
-        onClick={handleSubmit}
-      >
-        <span className="material-icons searchLogo">search</span>
-      </button>
+    <>
+      <form className="searchBar" onSubmit={handleSubmit}>
 
-    </div>
+        <input 
+          id="searchTerm" 
+          value={searchTerm} 
+          onChange={(e) => setSearchTerm(e.target.value)}
+          type="text"
+          placeholder=" Search Reddit" 
+        />
+        <button type="submit">
+          <span className="material-icons searchLogo">search</span>
+        </button>
+
+      </form>
+    </>
   )
 }
 

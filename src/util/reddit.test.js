@@ -7,21 +7,21 @@ describe('test reddit api ojbect', () => {
     it('returns the right string with one word', () => {
       const input = 'cookie';
       const realOutput = processSearchTerm(input);
-      const expectedOutput = 'http://www.reddit.com/search.json?q=cookie';
+      const expectedOutput = 'https://www.reddit.com/search.json?q=cookie';
       
       expect(realOutput).toBe(expectedOutput);
     })
     it('returns the right string with two words', () => {
       const input = 'cookie cutter';
       const realOutput = processSearchTerm(input);
-      const expectedOutput = 'http://www.reddit.com/search.json?q=cookie%20cutter';
+      const expectedOutput = 'https://www.reddit.com/search.json?q=cookie%20cutter';
       
       expect(realOutput).toBe(expectedOutput);
     })
     it('returns the right string with six words', () => {
       const input = 'cookie cutter crumble castle dragon slayer';
       const realOutput = processSearchTerm(input);
-      const expectedOutput = 'http://www.reddit.com/search.json?q=cookie%20cutter%20crumble%20castle%20dragon%20slayer';
+      const expectedOutput = 'https://www.reddit.com/search.json?q=cookie%20cutter%20crumble%20castle%20dragon%20slayer';
       
       expect(realOutput).toBe(expectedOutput);
     })
@@ -39,7 +39,7 @@ describe('test reddit api ojbect', () => {
 
       expect(fetch).toHaveBeenCalledTimes(1);
       expect(result).toEqual({children: [1, 2, 3, 4]});
-      expect(fetch.mock.calls[0][0]).toEqual('http://www.reddit.com/search.json?q=cookie%20cutter');
+      expect(fetch.mock.calls[0][0]).toEqual('https://www.reddit.com/search.json?q=cookie%20cutter');
     })
 
   })
