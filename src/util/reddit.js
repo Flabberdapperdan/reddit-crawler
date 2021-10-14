@@ -9,18 +9,14 @@ export const processSearchTerm = (searchTerm) => {
 }
   
   
-export const fetchArticles = async (searchTerm, searchLimit) => {
+export const fetchArticles = async (searchTerm) => {
   console.log('fetching from reddit')
-  const fetchString = await this.processSearchTerm(searchTerm);
-  const response = await fetch(fetchString, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      limit: searchLimit
-    }
-  });
-  
+  const fetchString = await processSearchTerm(searchTerm);
+  const response = await fetch(fetchString);
+
+  console.log(`the response status is: ${response.status}`)
   const jsonResponse = await response.json();
+  console.log(jsonResponse);
   
   if (jsonResponse.data.children.length > 0) {
     console.log('this is the response: ', jsonResponse);
