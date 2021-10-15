@@ -16,7 +16,6 @@ export const fetchArticles = async (searchTerm) => {
   const jsonResponse = await response.json();
   
   if (jsonResponse.data.children.length > 0) {
-    console.log('this is the response: ', jsonResponse);
     const finalResponse = jsonResponse.data
     return finalResponse;          
   } else {

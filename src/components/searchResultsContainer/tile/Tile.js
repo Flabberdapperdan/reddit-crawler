@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import './Tile.css';
 
 const Article = function({ title, author, upvotes, subreddit, thumbnail, articleURL }) {
-  console.log(thumbnail);
 
   const handleClick = () => {
-    console.log('I am handling the click')
     if(articleURL) {
       window.open(articleURL);
     }
