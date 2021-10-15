@@ -9,7 +9,7 @@
 
 .tile {
   background-color: var(--color4);
-  opacity: 95%;
+  opacity: .95;
 
   border-radius: 5px;
   padding: 10px 10px 10px 10px;
