@@ -1,7 +1,8 @@
 # Reddit-Crawler
 ## Summary
-A basic SPA that allows users to search reddit. 
-Practically it serves almost no purpose since the reddit search engine works just fine. 
+A basic SPA that allows users to search reddit. The user can enter a term in the searchbar and the site will give the first 25 search results. 
+These results are presented in the form of tiles, which give the title, a thumnbail and some additional information about the post. Additionally, these tiles are clickable and redirect the user to the corresponding reddit post.
+Practically speaking, it serves almost no purpose since the reddit search engine works just fine. 
 (And this site ultimately uses the exact same engine.) Therefore, this project is simply a way for me to practice my programming skills and try out new ideas.
 
 ## Technology
