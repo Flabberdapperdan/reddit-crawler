@@ -18,3 +18,6 @@ The simple version of the Reddit-API was used, rather than the more extensive - 
  - Create a way for thumbnails to always be displayed porperly.
  - Implement e2e testing.
  - Improve color scheme.
+
+## Bugs
+ - Every once in a while the tile, once clicked, will redirect to the article, picture, or other internet source that's mentioned it the post, rather than the post itself.
