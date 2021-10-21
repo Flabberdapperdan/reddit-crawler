@@ -20,8 +20,4 @@ The simple version of the Reddit-API was used, rather than the more extensive - 
  - Improve color scheme.
 
 ## Bugs
-<<<<<<< HEAD
  - Every once in a while the tile, once clicked, will redirect to the article, picture, or other internet source that's mentioned it the post, rather than the post itself.
-=======
- - Every once in a while the tile, once clicked, will redirect to the article, picture, or other internet source that's mentioned it the post, rather than the post itself. 
->>>>>>> loadingAnimation
