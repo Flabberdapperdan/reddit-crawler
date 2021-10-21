@@ -40,7 +40,6 @@ const searchResultsSlice = createSlice({
       }
     },
     [updateArticles.rejected]: (state, action) => {
-      console.log('async thunk rejected');
       const { requestId } = action.meta;
       if (state.articles.loading === 'pending' && tate.currentRequestId === requestId) {
         state.articles.loading === 'idle';
@@ -53,5 +52,6 @@ const searchResultsSlice = createSlice({
 
 export const articleArraySelector = state => state.searchResults.articles.children;
 export const articleErrorSelector = state => state.searchResults.articles.error;
+export const updateArticlesStatus = state => state.searchResults.articles.loading;
 
 export default searchResultsSlice;

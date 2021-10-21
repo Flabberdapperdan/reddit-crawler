@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { searchTermSelector } from '../searchBar/searchBarSlice';
-import { updateArticles, articleArraySelector } from './searchResultsSlice';
+// eslint-disable-next-line no-unused-vars
+import { updateArticles, articleArraySelector, updateArticlesStatus } from './searchResultsSlice';
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import Tile from'./tile/Tile';
@@ -14,13 +15,14 @@ const SearchResultsContainer = function() {
   // eslint-disable-next-line no-unused-vars
   const [searchLimit, setSearchLimit] = useState(10); //use this state later to determine the amount articles that are fetched
 
-  const searchTerm = useSelector(searchTermSelector);
-  const children = useSelector(articleArraySelector);
+  var searchTerm = useSelector(searchTermSelector);
+  var children = useSelector(articleArraySelector);
+  var fetchArticlesStatus = useSelector(updateArticlesStatus);
 
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    if(searchTerm) {
+    if (searchTerm) {
       try {
         const resultAction = await dispatch(updateArticles({ searchTerm: searchTerm, searchLimit: searchLimit }));
         unwrapResult(resultAction);
@@ -28,41 +30,48 @@ const SearchResultsContainer = function() {
         setErrorState(err.message);
       }
     }
-  }, [searchTerm])
+  }, [searchTerm]);
 
-  
-  if (searchTerm) {
-    return (
-      <div className="search-results">
-        {(() => {
-          if (children) {
-            return children.map((child, index) => {
-              const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
-              return ( 
-              <Tile 
-                className=""
-                key={index}
-                title={title}
-                author={author}
-                upvotes={ups}
-                subreddit={subreddit_name_prefixed}
-                articleURL={url}
-                thumbnail={thumbnail}
-              /> 
-            )})
-          } else if (errorState) {
-            return <p className="errorMessage">Error: {errorState}</p>
-          }
-        })()}
-      </div>
+  let content;
+
+  if (fetchArticlesStatus === 'pending') {
+    content = (
+      <span className="material-icons loadingLogo rotating">explore</span>
     )
-  } else {
-    return (
-      <>
-      </>
-    )
+  } else if (fetchArticlesStatus === 'idle') {
+    if (children.length > 0) {
+      content = (
+        <div className="search-results">
+          {children.map((child, index) => {
+            const { title, author, ups, subreddit_name_prefixed, url, thumbnail } = child.data;
+            return (
+                <Tile
+                  className=""
+                  key={index}
+                  title={title}
+                  author={author}
+                  upvotes={ups}
+                  subreddit={subreddit_name_prefixed}
+                  articleURL={url}
+                  thumbnail={thumbnail}
+                />
+            );
+          })}
+        </div>
+      )
+    } else if (errorState) {
+      content = <p className="errorMessage">Error: {errorState}</p>;
+    } else if (children.length === 0) {
+      content = <></>
+    }
   }
+
+  return (
+    <>
+      {content}
+    </>
+  )
 
 }
 
-export default SearchResultsContainer
+export default SearchResultsContainer;
